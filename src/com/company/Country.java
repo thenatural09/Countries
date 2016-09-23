@@ -19,4 +19,12 @@ public class Country {
     public String getAbbrev() {
         return abbrev;
     }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "name='" + name + '\'' +
+                ", abbrev='" + abbrev + '\'' +
+                '}';
+    }
 }

@@ -3,10 +3,7 @@ package com.company;
 import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -32,17 +29,29 @@ public class Main {
         //Adding array lists to hashmap and making new txt files for each user
         System.out.println("Enter a letter");
         Scanner scanner = new Scanner(System.in);
+        String letter = scanner.nextLine();
+
         for(Country country : countries) {
-            ArrayList<Country> countries1 = countryMap.get(country.name.substring(0,1));
-            if (countries1 == null) {
-                countries1 = new ArrayList<>();
-                countryMap.put(country.name.substring(0,1),countries1);
+            String firstLetter = String.valueOf(country.name.charAt(0));
+            if (!countryMap.containsKey(firstLetter)) {
+                countryMap.put(firstLetter, new ArrayList<>());
             }
-            countries1.add(country);
+            countryMap.get(firstLetter).add(country);
+        }
+
+        //saving txt file
+        File countryFile = new File(letter + "_countries.txt");
+        try {
+        FileWriter fw = new FileWriter(countryFile);
+        ArrayList countries1 = countryMap.get(letter.toUpperCase());
+        fw.write(countries1.toString());
+        fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    //Loading File
+    //Loading  json File
     public void loadFile(String fileName) {
         File f = new File(fileName);
         FileReader fr = null;
@@ -57,7 +66,7 @@ public class Main {
         }
     }
 
-    //Saving File
+    //Saving json File
     public void saveFile(Country country,String fileName) {
         JsonSerializer serializer = new JsonSerializer();
         String json = serializer.deep(true).serialize(country);
