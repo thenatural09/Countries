@@ -1,10 +1,9 @@
-import com.company.Country;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+package com.company;
 
 import java.util.ArrayList;
 
 /**
- * Created by Troy on 9/23/16.
+ * Created by Troy on 9/25/16.
  */
 public class CountryWrapper {
     ArrayList<Country> countries;
@@ -24,4 +23,3 @@ public class CountryWrapper {
         this.countries = countries;
     }
 }
-

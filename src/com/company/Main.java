@@ -9,10 +9,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
+    public static HashMap<String, ArrayList<Country>> countryMap = new HashMap<>();
+    public static ArrayList<Country> countries = new ArrayList<>();
+
 
     public static void main(String[] args) throws FileNotFoundException {
-        HashMap<String, ArrayList<Country>> countryMap = new HashMap<>();
-        ArrayList<Country> countries = new ArrayList<>();
 
         //File Reader
         File f = new File("countries.txt");
@@ -26,29 +27,8 @@ public class Main {
             countries.add(c);
         }
 
-        //Adding array lists to hashmap and making new txt files for each user
-        System.out.println("Enter a letter");
-        Scanner scanner = new Scanner(System.in);
-        String letter = scanner.nextLine();
-
-        for(Country country : countries) {
-            String firstLetter = String.valueOf(country.name.charAt(0));
-            if (!countryMap.containsKey(firstLetter)) {
-                countryMap.put(firstLetter, new ArrayList<>());
-            }
-            countryMap.get(firstLetter).add(country);
-        }
-
-        //saving txt file
-        File countryFile = new File(letter + "_countries.txt");
-        try {
-        FileWriter fw = new FileWriter(countryFile);
-        ArrayList countries1 = countryMap.get(letter.toUpperCase());
-        fw.write(countries1.toString());
-        fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Country country = new Country();
+        country.chooseCountry();
     }
 
     //Loading  json File
