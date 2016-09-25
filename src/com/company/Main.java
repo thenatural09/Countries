@@ -13,7 +13,7 @@ public class Main {
     public static ArrayList<Country> countries = new ArrayList<>();
 
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws Exception {
 
         //File Reader
         File f = new File("countries.txt");

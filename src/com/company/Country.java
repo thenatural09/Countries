@@ -10,8 +10,9 @@ import java.util.Scanner;
  * Created by Troy on 9/23/16.
  */
 public class Country {
-    String name;
-    String abbrev;
+    public String name;
+    public String abbrev;
+    public String letter;
 
     public Country () {
     }
@@ -37,10 +38,10 @@ public class Country {
                 '}';
     }
 
-    public void chooseCountry() {
+    public void chooseCountry() throws Exception {
         System.out.println("Enter a letter");
         Scanner scanner = new Scanner(System.in);
-        String letter = scanner.nextLine();
+        letter = scanner.nextLine();
 
         for (Country country : Main.countries) {
             String firstLetter = String.valueOf(country.name.charAt(0));
@@ -48,6 +49,10 @@ public class Country {
                 Main.countryMap.put(firstLetter, new ArrayList<>());
             }
             Main.countryMap.get(firstLetter).add(country);
+        }
+
+        if (letter.equals("")){
+            throw new Exception("Invalid letter");
         }
 
         //saving txt file
