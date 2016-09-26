@@ -113,7 +113,7 @@ public class Country {
             String[] columns = line.split("\\|");
             String abbrev = columns[0];
             String name = columns[1];
-            Country c = new Country(abbrev, name);
+            Country c = new Country(name, abbrev);
             countries.add(c);
         }
     }
