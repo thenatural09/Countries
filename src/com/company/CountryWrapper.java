@@ -11,15 +11,15 @@ public class CountryWrapper {
     public CountryWrapper() {
     }
 
-    public CountryWrapper(ArrayList<Country> people) {
+    public CountryWrapper(ArrayList<Country> countries) {
         this.countries = countries;
     }
 
-    public ArrayList<Country> getPeople() {
+    public ArrayList<Country> getCountries() {
         return countries;
     }
 
-    public void setPeople(ArrayList<Country> people) {
+    public void setCountries(ArrayList<Country> countries) {
         this.countries = countries;
     }
 }

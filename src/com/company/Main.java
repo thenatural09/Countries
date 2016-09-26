@@ -14,6 +14,7 @@ public class Main {
         country.saveTxtCountry();
         country.addCountry();
         country.chooseCountry();
-        country.saveFile(country,country.letter + "_country.json");
+        country.saveFile(country.cw,country.letter + "_country.json");
+        country.loadFile(country.letter + "_country.json");
     }
 }

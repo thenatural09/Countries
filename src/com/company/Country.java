@@ -18,7 +18,6 @@ public class Country {
     public String firstLetter;
     public HashMap<String, ArrayList<Country>> countryMap = new HashMap<>();
     public ArrayList<Country> countries = new ArrayList<>();
-    public CountryWrapper cw = new CountryWrapper();
 
     public Country () {
     }
@@ -76,21 +75,23 @@ public class Country {
         }
     }
 
-//    public void loadFile(String fileName) {
-//        File f = new File(fileName);
-//        FileReader fr = null;
-//        try {
-//            fr = new FileReader(f);
-//            int fileSize = (int) f.length();
-//            char[] contents = new char[fileSize];
-//            fr.read(contents, 0, fileSize);
-//            JsonParser parser = new JsonParser();
-//        } catch (Exception e) {
-//            System.out.println("Couldn't load file");
-//        }
-//    }
+    public void loadFile(String fileName) {
+        File f = new File(fileName);
+        FileReader fr = null;
+        try {
+            fr = new FileReader(f);
+            int fileSize = (int) f.length();
+            char[] contents = new char[fileSize];
+            fr.read(contents, 0, fileSize);
+            JsonParser parser = new JsonParser();
+            CountryWrapper cw = parser.parse(contents,CountryWrapper.class);
+            System.out.println(cw);
+        } catch (Exception e) {
+            System.out.println("Couldn't load file");
+        }
+    }
 
-    public void saveFile(Country country,String fileName) {
+    public void saveFile(, String fileName) {
         JsonSerializer serializer = new JsonSerializer();
         String json = serializer.deep(true).serialize(cw);
         File f = new File(fileName);
