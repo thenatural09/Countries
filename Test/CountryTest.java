@@ -13,7 +13,12 @@ public class CountryTest {
         Country country = new Country();
         country.name = "test country";
         country.abbrev = "TC";
-        country.chooseCountry();
-        assertTrue(country.name.equalsIgnoreCase("test country"));
+        country.firstLetter = "t";
+        assertTrue(country.name.contains("test country"));
+    }
+
+    @Test
+    public void testSaveCountry () {
+
     }
 }
