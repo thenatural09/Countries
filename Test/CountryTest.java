@@ -16,9 +16,4 @@ public class CountryTest {
         country.firstLetter = "t";
         assertTrue(country.name.contains("test country"));
     }
-
-    @Test
-    public void testSaveCountry () {
-
-    }
 }
