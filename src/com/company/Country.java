@@ -60,17 +60,28 @@ public class Country {
         }
 
         //saving txt file
-        File countryFile = new File(letter + "_countries.txt");
+        File f = new File(letter + "_countries.txt");
         try {
-            FileWriter fw = new FileWriter(countryFile);
-            ArrayList countries1 = countryMap.get(letter.toUpperCase());
+            FileWriter fw = new FileWriter(f);
+            ArrayList countries1 = countryMap.get(letter);
             fw.write(countries1.toString());
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        saveFile(letter,countryMap.get(letter.toUpperCase()));
+        File f1 = new File(letter + "_countries.json");
+        try {
+            JsonSerializer serializer = new JsonSerializer();
+            CountryWrapper cw = new CountryWrapper(countries);
+            cw.countries = countryMap.get(letter);
+            String json = serializer.deep(true).serialize(cw);
+            FileWriter fw = new FileWriter(f1);
+            fw.write(json);
+            fw.close();
+        } catch (Exception e) {
+            System.out.println("Couldn't save to file");
+        }
     }
 
     public void loadFile(String fileName) {
@@ -86,21 +97,6 @@ public class Country {
             System.out.println(cw);
         } catch (Exception e) {
             System.out.println("Couldn't load file");
-        }
-    }
-
-    public void saveFile(String firstLetter, ArrayList<Country> countries1) {
-        JsonSerializer serializer = new JsonSerializer();
-        CountryWrapper cw = new CountryWrapper();
-        cw.countries = countries1;
-        String json = serializer.deep(true).serialize(cw);
-        File f = new File(firstLetter + "_countries.json");
-        try {
-            FileWriter fw = new FileWriter(f);
-            fw.write(json);
-            fw.close();
-        } catch (Exception e) {
-            System.out.println("Couldn't save to file");
         }
     }
 

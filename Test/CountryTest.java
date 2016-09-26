@@ -14,6 +14,5 @@ public class CountryTest {
         country.name = "test country";
         country.abbrev = "TC";
         country.firstLetter = "t";
-        assertTrue(country.name.contains("test country"));
     }
 }
