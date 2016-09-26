@@ -35,14 +35,6 @@ public class Country {
         return abbrev;
     }
 
-    @Override
-    public String toString() {
-        return "Country{" +
-                "name='" + name + '\'' +
-                ", abbrev='" + abbrev + '\'' +
-                '}';
-    }
-
 
     public void addCountry() {
         for (Country country : countries) {
@@ -63,6 +55,10 @@ public class Country {
             throw new Exception("Invalid letter");
         }
 
+        if (letter.length() > 1) {
+            throw new Exception("Invalid letter");
+        }
+
         //saving txt file
         File countryFile = new File(letter + "_countries.txt");
         try {
@@ -73,6 +69,8 @@ public class Country {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        saveFile(letter,countryMap.get(letter.toUpperCase()));
     }
 
     public void loadFile(String fileName) {
@@ -91,11 +89,12 @@ public class Country {
         }
     }
 
-    public void saveFile(String fileName) {
-        CountryWrapper cw = new CountryWrapper(countryMap.get(firstLetter));
+    public void saveFile(String firstLetter, ArrayList<Country> countries1) {
         JsonSerializer serializer = new JsonSerializer();
+        CountryWrapper cw = new CountryWrapper();
+        cw.countries = countries1;
         String json = serializer.deep(true).serialize(cw);
-        File f = new File(fileName);
+        File f = new File(firstLetter + "_countries.json");
         try {
             FileWriter fw = new FileWriter(f);
             fw.write(json);
@@ -117,6 +116,14 @@ public class Country {
             Country c = new Country(abbrev, name);
             countries.add(c);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "name='" + name + '\'' +
+                ", abbrev='" + abbrev + '\'' +
+                '}';
     }
 }
 

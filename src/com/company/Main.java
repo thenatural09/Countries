@@ -6,7 +6,5 @@ public class Main {
         country.saveTxtCountry();
         country.addCountry();
         country.chooseCountry();
-        country.saveFile(country.letter + "_countries.json");
-        country.loadFile(country.letter + "_countries.json");
     }
 }
